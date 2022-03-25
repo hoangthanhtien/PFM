@@ -4,20 +4,20 @@
     "password": "123",
     "database": "pfm",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgresql"
   },
   "test": {
     "username": "postgres",
     "password": "123",
     "database": "pfm",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgresql"
   },
   "production": {
     "username": "postgres",
     "password": "123",
     "database": "pfm",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgresql"
   }
 }
