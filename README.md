@@ -8,6 +8,8 @@ A project to help managing personal finance
 
 <img src="./assets/PFM_ERD.png">
 
+Details:
+<img src="./assets/PFM_ERD_POSTGRES.png">
 ### Techstack
 
 **Backend frameworks**:

@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.User)
+      this.belongsToMany(models.WalletType, {through: 'walletWalletTypes', foreignKey: 'walletId'})
+      this.hasMany(models.Income)
+      this.hasMany(models.Expense)
     }
   }
   Wallet.init(
@@ -16,12 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       walletName: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       totalBalance: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
-      walletStatus: {
+      isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
