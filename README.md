@@ -42,7 +42,7 @@ Constrains:
 
 **Expense**
 
-**TODO: Add the concurrency support**
+**TODO: Add the currency support**
 |Column|Type|Description|
 |---|---|---|
 |expenseAmount|float|One-time spending amount record or recurring spending amount record|
@@ -68,7 +68,7 @@ Constrains:
 ---
 **Income**
 
-**TODO: Add the concurrency support**
+**TODO: Add the currency support**
 |Column|Type|Description|
 |---|---|---|
 |incomeAmount|float|One-time income amount record or recurring income amount record|
