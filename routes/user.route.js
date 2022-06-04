@@ -8,4 +8,8 @@ router.post("/:id/update", userController.updateUser);
 router.get("/verify-create/:secretKey", userController.verifyUser);
 router.delete("/:id/delete", userController.deleteUser);
 
+router.post("/login", userController.loginUser);
+router.get("/current", userController.authUser);
+router.get("/logout", userController.logOutUser);
+
 module.exports = router;
