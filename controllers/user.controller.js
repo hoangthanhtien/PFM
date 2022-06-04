@@ -210,8 +210,7 @@ const loginUser = async (req, res, next) => {
     await redisClient.set(accessToken, JSON.stringify(user), {
       EX: 12 * 60 * 60, // Access token valid for 12 hours
     });
-    logger.info(`User ${user.id} logged in`);
-    return res.send(user);
+    return res.send({ ...user, accessToken });
   } catch (error) {
     logger.error(`Error while logging in user: ${error.stack}`);
     return res.status(500).json({ message: "Something went wrong" });

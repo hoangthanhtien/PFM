@@ -1,16 +1,11 @@
-require("dotenv").config();
-const express = require("express");
-const app = express();
+const app = require("./app");
+
 const port = process.env.PORT || 8080;
 const { sequelize } = require("./models");
 const { redisClient } = require("./services");
-const userRoutes = require("./routes/user.route");
-const walletRoutes = require("./routes/wallet.route");
-app.get("/check_health", (req, res) => res.send("OK"));
 
 app.listen(port, async () => {
   console.log(`Server listening on port ${port}!`);
-  app.use(express.json());
 
   // Test the database connection
   try {
@@ -19,7 +14,6 @@ app.listen(port, async () => {
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
-  // Initialize cache
   await redisClient.connect();
   // Automatically sync database models on development environment
   if (process.env.ENVIRONMENT === "DEVELOP") {
@@ -31,7 +25,4 @@ app.listen(port, async () => {
       console.error("Unable to sync database models:", error);
     }
   }
-  // Routes
-  app.use("/api/users", userRoutes);
-  app.use("/api/wallets", walletRoutes);
 });
