@@ -1,5 +1,5 @@
 // db = require("./database");
-redisClient = require("./cache");
+const redisClient = require("./cache");
 
 module.exports = {
   // db,
