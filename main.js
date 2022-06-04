@@ -5,6 +5,7 @@ const port = process.env.PORT || 8080;
 const { sequelize } = require("./models");
 const { redisClient } = require("./services");
 const userRoutes = require("./routes/user.route");
+const walletRoutes = require("./routes/wallet.route");
 app.get("/check_health", (req, res) => res.send("OK"));
 
 app.listen(port, async () => {
@@ -32,4 +33,5 @@ app.listen(port, async () => {
   }
   // Routes
   app.use("/api/users", userRoutes);
+  app.use("/api/wallets", walletRoutes);
 });

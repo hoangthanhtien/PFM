@@ -6,6 +6,7 @@ const db = require("../models");
 const { hashPassword } = require("../helpers/bcrypt");
 const User = db.User;
 const { redisClient, logger } = require("../services");
+const bcrypt = require("bcrypt");
 
 // TODO: Add pagination
 const getAllUsers = async (req, res, next) => {
@@ -164,7 +165,9 @@ const deleteUser = async (req, res, next) => {
         id: userId,
       },
     });
-    return res.send(user);
+    return res.send({
+      message: `User ${user.id} has been deleted`,
+    });
   } catch (error) {
     logger.error(`Error while deleting user: ${error.stack}`);
     return res.status(500).json({ message: "Something went wrong" });
@@ -189,14 +192,15 @@ const loginUser = async (req, res, next) => {
         email,
       },
     });
+    user = user?.dataValues;
     if (!user) {
       return res.status(400).send({
         message: "User not found",
       });
     }
-    const { hashedPassword, salt } = user;
-    const hashedPasswordFromUser = await hashPassword(password, salt);
-    if (hashedPassword !== hashedPasswordFromUser) {
+    const { password: hashedPassword } = user;
+    const validPassword = await bcrypt.compare(password, hashedPassword);
+    if (!validPassword) {
       return res.status(400).send({
         message: "Invalid password",
       });
