@@ -15,7 +15,8 @@ describe("checkhealth", () => {
 
 describe("/api/users", () => {
   it("should return OK", async () => {
-    const { statusCode } = await supertest(app).get("/api/users");
+    const { statusCode, body } = await supertest(app).get("/api/users");
+    console.log("body", body);
     expect(statusCode).toBe(200);
   });
 });
